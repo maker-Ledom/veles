@@ -1,9 +1,11 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyController : MonoBehaviour
 {
+    public LootSpawner lootSpawner;
     public EnemyData data;
     
     [Header("Components")]
@@ -92,6 +94,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+
         _isDead = true;
         _agent.isStopped = true;
         _agent.enabled = false; // Отключаем NavMesh, чтобы труп не скользил
@@ -107,5 +110,6 @@ public class EnemyController : MonoBehaviour
 
         // Удаляем объект с задержкой в 3 секунды, чтобы игрок успел увидеть анимацию смерти
         Destroy(gameObject, 3f);
+        if (data.isBoss) lootSpawner.SpawnLoot();
     }
 }

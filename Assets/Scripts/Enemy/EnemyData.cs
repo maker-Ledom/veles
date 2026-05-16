@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     public string enemyName;
+    public bool isBoss;
     public float maxHealth = 50f;
     public float moveSpeed = 3.5f;
     public float attackDamage = 10f;

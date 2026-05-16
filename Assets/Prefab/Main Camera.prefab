@@ -44,8 +44,8 @@ Camera:
   m_GameObject: {fileID: 1025974122854703651}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -150,6 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f21a3292b121c44bd6d3d3a72d84f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  target: {fileID: 3586289321635180087, guid: b2a446c405f2c0145961fbbb9fc458a6, type: 3}
+  target: {fileID: 2156611119353188294, guid: b2a446c405f2c0145961fbbb9fc458a6, type: 3}
   offset: {x: -7, y: 15, z: -7}
   smoothSpeed: 0.125
