@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   isPurchased: 1
   weaponName: Pistol
-  icon: {fileID: 2052776441, guid: 1361353360a3ef442bb6726d21a9ff0a, type: 3}
+  icon: {fileID: 467892428, guid: e56da8c14470f984d928f5ebd7a4c490, type: 3}
   damage: 10
   fireRate: 0.4
   projectileSpeed: 20
