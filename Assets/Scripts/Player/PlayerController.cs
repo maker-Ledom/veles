@@ -17,8 +17,13 @@ public class PlayerController : MonoBehaviour
         _model = model;
         _data = data;
         _characterController = GetComponent<CharacterController>();
+        model.OnWeaponChanged += OnWeaponChanged;
+        currentWeapon = model.CurrentWeapon;
     }
-
+    private void OnWeaponChanged(WeaponData newWeapon)
+    {
+        currentWeapon = newWeapon;
+    }
     public void HandleLookRotation(Vector3 lookTarget)
     {
         Vector3 direction = lookTarget - transform.position;
@@ -76,5 +81,10 @@ public class PlayerController : MonoBehaviour
         
         // Передаем параметры из текущего оружия
         projectile.Init(currentWeapon.damage, currentWeapon.projectileSpeed);
+    }
+    private void OnDestroy()
+    {
+        if (_model != null)
+            _model.OnWeaponChanged -= OnWeaponChanged;
     }
 }
