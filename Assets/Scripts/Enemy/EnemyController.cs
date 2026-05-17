@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     private float _currentHealth;
     private float _nextAttackTime;
     private bool _isDead = false; // Флаг смерти, чтобы труп не атаковал
-
+    private PlayerRuntime _playerRuntime;
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -25,6 +25,7 @@ public class EnemyController : MonoBehaviour
         // Находим игрока
         var playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) _player = playerObj.transform;
+        _playerRuntime = playerObj.GetComponent<PlayerRuntime>(); 
 
         // Если забыли перетянуть аниматор в инспекторе, код найдет его сам
         if (_animator == null) _animator = GetComponentInChildren<Animator>();
@@ -103,9 +104,11 @@ public class EnemyController : MonoBehaviour
 
         // ЗАПУСКАЕМ АНИМАЦИЮ СМЕРТИ
         _animator.SetTrigger("Die");
-
-        // Здесь можно вызвать спавн лута, как ты делал на боссе
-        // LootSpawner.SpawnLoot();
+        if (_playerRuntime != null && data.coinsReward > 0)
+        {
+            _playerRuntime.CollectCoin(data.coinsReward);
+            Debug.Log($"Получено {data.coinsReward} монет с {data.enemyName}");
+        }
 
         // Удаляем объект с задержкой в 3 секунды, чтобы игрок успел увидеть анимацию смерти
         Destroy(gameObject, 3f);

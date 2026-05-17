@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 286140251}
   - component: {fileID: 286140250}
   - component: {fileID: 286140249}
+  - component: {fileID: 286140252}
   m_Layer: 0
   m_Name: floor (3)
   m_TagString: Untagged
@@ -502,6 +503,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 819743319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &286140252
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286140248}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12159075, y: 0.0036477286, z: 0.12159075}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &337028017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3286,6 +3308,7 @@ GameObject:
   - component: {fileID: 1476723445}
   - component: {fileID: 1476723444}
   - component: {fileID: 1476723443}
+  - component: {fileID: 1476723446}
   m_Layer: 0
   m_Name: floor (1)
   m_TagString: Untagged
@@ -3365,6 +3388,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 819743319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1476723446
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476723442}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12159075, y: 0.0036477286, z: 0.12159075}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1483029243 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3c04be6315069c34d953d492f2044c0c, type: 3}
@@ -4356,6 +4400,7 @@ GameObject:
   - component: {fileID: 1916601450}
   - component: {fileID: 1916601449}
   - component: {fileID: 1916601448}
+  - component: {fileID: 1916601451}
   m_Layer: 0
   m_Name: floor (4)
   m_TagString: Untagged
@@ -4435,6 +4480,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 819743319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1916601451
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916601447}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12159075, y: 0.0036477286, z: 0.12159075}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1921634714
 GameObject:
   m_ObjectHideFlags: 0
@@ -4446,6 +4512,7 @@ GameObject:
   - component: {fileID: 1921634717}
   - component: {fileID: 1921634716}
   - component: {fileID: 1921634715}
+  - component: {fileID: 1921634718}
   m_Layer: 0
   m_Name: floor (2)
   m_TagString: Untagged
@@ -4525,6 +4592,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 819743319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1921634718
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921634714}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12159075, y: 0.0036477286, z: 0.12159075}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1987550060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8030,6 +8118,7 @@ GameObject:
   - component: {fileID: 4600550652702085829}
   - component: {fileID: 610145274155818336}
   - component: {fileID: 3428185639682582954}
+  - component: {fileID: 4600550652702085830}
   m_Layer: 0
   m_Name: floor
   m_TagString: Untagged
@@ -8494,6 +8583,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 819743319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4600550652702085830
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3788548583600392319}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12159075, y: 0.0036477286, z: 0.12159075}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4680521722183520234 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5433455031561504329, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}

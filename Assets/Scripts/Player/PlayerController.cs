@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+
 public class PlayerController : MonoBehaviour
 {
     private PlayerModel _model;
@@ -7,11 +8,21 @@ public class PlayerController : MonoBehaviour
     private CharacterController _characterController;
     private bool _isDashing = false;
     private float _lastDashTime;
+
+    // === НОВОЕ: гравитация ===
+    private Vector3 _velocity;
+    private bool _isGrounded;
+
     public bool CanDash => !_isDashing && Time.time >= _lastDashTime + _model.CurrentDashCooldown;
+
     [Header("Weapon System")]
-    [SerializeField] private Transform firePoint; // Точка, откуда вылетает пуля (конец ствола)
+    [SerializeField] private Transform firePoint;
     public WeaponData currentWeapon;
     private float _nextFireTime;
+
+    [Header("Gravity Settings")]   // НОВОЕ: настройка силы гравитации
+    [SerializeField] private float gravityMultiplier = 1f;
+
     public void Init(PlayerModel model, PlayerData data)
     {
         _model = model;
@@ -20,24 +31,24 @@ public class PlayerController : MonoBehaviour
         model.OnWeaponChanged += OnWeaponChanged;
         currentWeapon = model.CurrentWeapon;
     }
+
     private void OnWeaponChanged(WeaponData newWeapon)
     {
         currentWeapon = newWeapon;
     }
+
     public void HandleLookRotation(Vector3 lookTarget)
     {
         Vector3 direction = lookTarget - transform.position;
-        direction.y = 0; 
+        direction.y = 0;
 
         if (direction.sqrMagnitude > 0.001f)
         {
-            // Мгновенно вычисляем нужный поворот
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            
-            // Назначаем его напрямую без Slerp
             transform.rotation = targetRotation;
         }
     }
+
     public IEnumerator Dash(Vector3 dashDirection)
     {
         _isDashing = true;
@@ -54,15 +65,32 @@ public class PlayerController : MonoBehaviour
 
         _isDashing = false;
     }
+
+    // ========== ОБНОВЛЁННЫЙ МЕТОД ПЕРЕМЕЩЕНИЯ С ГРАВИТАЦИЕЙ ==========
     public void HandleMovement(Vector3 inputDirection)
     {
         if (_isDashing) return;
-        if (inputDirection.magnitude >= 0.1f)
+
+        // 1. Горизонтальное движение (от ввода игрока)
+        Vector3 move = inputDirection * _data.moveSpeed;
+
+        // 2. Вертикальная скорость (гравитация)
+        if (_characterController.isGrounded && _velocity.y < 0)
         {
-            // Только перемещение. Вращение здесь БОЛЬШЕ НЕ НУЖНО.
-            _characterController.Move(inputDirection * _data.moveSpeed * Time.deltaTime);
+            _velocity.y = -2f; // небольшое прижатие к земле
         }
+
+        // Применяем гравитацию (Physics.gravity.y = -9.81)
+        _velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
+        move.y = _velocity.y;
+
+        // 3. Перемещаем персонажа
+        _characterController.Move(move * Time.deltaTime);
+
+        // 4. Обновляем флаг grounded для следующего кадра
+        _isGrounded = _characterController.isGrounded;
     }
+
     public void TryShoot()
     {
         if (currentWeapon == null) return;
@@ -73,15 +101,14 @@ public class PlayerController : MonoBehaviour
             _nextFireTime = Time.time + currentWeapon.fireRate;
         }
     }
+
     private void Shoot()
     {
-        // Создаем пулю в точке выстрела
         GameObject bulletObj = Instantiate(currentWeapon.projectilePrefab, firePoint.position, transform.rotation);
         Projectile projectile = bulletObj.GetComponent<Projectile>();
-        
-        // Передаем параметры из текущего оружия
         projectile.Init(currentWeapon.damage, currentWeapon.projectileSpeed);
     }
+
     private void OnDestroy()
     {
         if (_model != null)

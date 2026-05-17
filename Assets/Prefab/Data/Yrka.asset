@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Yrka
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Yrka
+  isBoss: 0
   maxHealth: 50
   moveSpeed: 1.7
   attackDamage: 10
   attackRange: 1.5
   attackCooldown: 1.5
   detectionRange: 5
-  coinsReward: 5
+  coinsReward: 15
