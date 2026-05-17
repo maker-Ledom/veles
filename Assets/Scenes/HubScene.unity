@@ -872,11 +872,121 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b24936d1528908040ae1ef4b95f4dc2a, type: 3}
   m_PrefabInstance: {fileID: 1467188019}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &413657978 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2758319605722677112, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &413657979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6131263657548481209, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &413657980 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8408464375760276885, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &413657981 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7099713697245313279, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413657979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &413657982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413657979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a990b02d61194324bb0fcb865f13db57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponShopSlot
+  weaponData: {fileID: 11400000, guid: 970f10c7655a38046abe5eb05eb69a27, type: 2}
+  price: 40
+  priceText: {fileID: 413657980}
+  actionButton: {fileID: 413657981}
+  buttonText: {fileID: 413657978}
 --- !u!4 &419943185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b24936d1528908040ae1ef4b95f4dc2a, type: 3}
   m_PrefabInstance: {fileID: 1709723084}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &422358555 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7385625895180513681, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &422358556 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6892882635893265329, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &422358557 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3552052451788126238, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &422358558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9073133854781533274, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422358557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &422358559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422358557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a990b02d61194324bb0fcb865f13db57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponShopSlot
+  weaponData: {fileID: 11400000, guid: 80ac0511a489aa14d82dbd23f5390068, type: 2}
+  price: 10
+  priceText: {fileID: 422358555}
+  actionButton: {fileID: 422358558}
+  buttonText: {fileID: 422358556}
 --- !u!4 &424581255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3c04be6315069c34d953d492f2044c0c, type: 3}
@@ -7633,6 +7743,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1215377146172465040, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3783329973489390940}
+    - target: {fileID: 1215377146172465040, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215377146172465040, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WeaponShopSlot, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1629596415139539348, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7773,6 +7895,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7099713697245313279, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 413657982}
+    - target: {fileID: 7099713697245313279, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099713697245313279, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WeaponShopSlot, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8538698660699525141, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7785,10 +7919,34 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1766253618}
-    m_RemovedComponents: []
+    - target: {fileID: 9073133854781533274, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 422358559}
+    - target: {fileID: 9073133854781533274, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 9073133854781533274, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WeaponShopSlot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7107192093228365571, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+    - {fileID: 1292424716554801917, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+    - {fileID: 2676790310030095463, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3552052451788126238, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 422358559}
+    - targetCorrespondingSourceObject: {fileID: 3993615411541388844, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3783329973489390940}
+    - targetCorrespondingSourceObject: {fileID: 6131263657548481209, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 413657982}
   m_SourcePrefab: {fileID: 100100000, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
 --- !u!1 &3783329973489390934 stripped
 GameObject:
@@ -7806,6 +7964,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e990f3816a5414286ab3c7347d4631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIController
+--- !u!114 &3783329973489390936 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7874308595462651418, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &3783329973489390937 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2697703543646828385, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &3783329973489390938 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3993615411541388844, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3783329973489390939 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1215377146172465040, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 3783329973489390933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783329973489390938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &3783329973489390940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783329973489390938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a990b02d61194324bb0fcb865f13db57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponShopSlot
+  weaponData: {fileID: 11400000, guid: 3ad9d38f6b7e7b24eb71a5da8c833307, type: 2}
+  price: 20
+  priceText: {fileID: 3783329973489390936}
+  actionButton: {fileID: 3783329973489390939}
+  buttonText: {fileID: 3783329973489390937}
 --- !u!1 &3788548583600392319
 GameObject:
   m_ObjectHideFlags: 0
