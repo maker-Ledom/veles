@@ -119,6 +119,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &123885980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 123885982}
+  - component: {fileID: 123885981}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &123885981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123885980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446f233e2d1291b47abaab45b6cb5255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+--- !u!4 &123885982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123885980}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.3734, y: 0, z: 6.63056}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &220787342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -295,6 +339,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2156611119353188294, guid: b2a446c405f2c0145961fbbb9fc458a6, type: 3}
   m_PrefabInstance: {fileID: 626686972}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1115733904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3187663473148191772, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+  m_PrefabInstance: {fileID: 1392512673}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1133733678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1133733680}
+  - component: {fileID: 1133733679}
+  m_Layer: 0
+  m_Name: _SceneSetup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1133733679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133733678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bf1b8962e9604b4f97f0f4ba93bc9e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneData
+  pausePanel: {fileID: 1115733904}
+  allModals:
+  - {fileID: 1392512676}
+--- !u!4 &1133733680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133733678}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.37338, y: 0, z: 6.63056}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1181839457
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +529,10 @@ PrefabInstance:
     - target: {fileID: 1897533965337260292, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2743818788073324507, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4405578334313279019, guid: c6109d7f7ad972342aa29b7821f69a91, type: 3}
       propertyPath: m_Pivot.x
@@ -818,6 +918,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7241671301667317464, guid: 6fcfaa6b753f8d7489c30275caf597a7, type: 3}
+      propertyPath: targetSceneName
+      value: FinalScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -828,9 +932,11 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1181839459}
+  - {fileID: 123885982}
   - {fileID: 1410500755}
   - {fileID: 626686972}
   - {fileID: 1392512673}
   - {fileID: 1660486768}
   - {fileID: 2117114163}
   - {fileID: 220787342}
+  - {fileID: 1133733680}

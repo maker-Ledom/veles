@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16a82703d0416b4c9b519a7c6c4493b, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  baseStrength: 10
-  baseAgility: 10
+  baseStrength: 1
+  baseAgility: 1
+  baseUpgradeCost: 10
+  costMultiplier: 1.5
   hpPerStrength: 10
   dashCooldownReduction: 0.1
   moveSpeed: 5

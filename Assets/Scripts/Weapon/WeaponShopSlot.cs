@@ -4,89 +4,88 @@ using TMPro;
 
 public class WeaponShopSlot : MonoBehaviour
 {
-    [Header("Настройки оружия")]
+    [Header("Weapon Settings")]
     public WeaponData weaponData;
     public int price;
 
-    [Header("UI Элементы")]
-    [SerializeField] private TextMeshProUGUI priceText;    
-    [SerializeField] private Button actionButton;         
-    [SerializeField] private TextMeshProUGUI buttonText;  
+    [Header("UI Elements")]
+    [SerializeField] private TextMeshProUGUI priceText;
+    [SerializeField] private Button actionButton;
+    [SerializeField] private TextMeshProUGUI buttonText;
 
-    private PlayerModel _model;
+    private PlayerModel playerModel;
 
     private void Start()
     {
         if (GameManager.Instance != null)
         {
-            _model = GameManager.Instance.PlayerModel;
-            _model.OnWeaponChanged += HandleWeaponChanged;
+            playerModel = GameManager.Instance.PlayerModel;
+            playerModel.OnWeaponChanged += HandleWeaponChanged;
         }
         RefreshUI();
     }
 
-    private void OnDisable() // Или OnDestroy, чтобы избежать ошибки со ссылками
+    private void OnDisable()
     {
-        if (_model != null)
-            _model.OnWeaponChanged -= HandleWeaponChanged;
+        if (playerModel != null)
+        {
+            playerModel.OnWeaponChanged -= HandleWeaponChanged;
+        }
     }
 
-    private void HandleWeaponChanged(WeaponData newData)
+    private void HandleWeaponChanged(WeaponData newWeapon)
     {
         if (this == null) return;
-        RefreshUI(); 
+        RefreshUI();
     }
 
     public void OnClick()
     {
-        if (_model == null) return;
+        if (playerModel == null || weaponData == null) return;
 
-        // Спрашиваем ИНВЕНТАРЬ ИГРОКА, куплено ли оружие
-        bool isPurchased = _model.IsWeaponPurchased(weaponData);
+        bool isPurchased = playerModel.IsWeaponPurchased(weaponData);
 
         if (!isPurchased)
         {
-            // Покупка
-            if (_model.SpendCoins(price))
+            if (playerModel.SpendCoins(price))
             {
-                _model.AddPurchasedWeapon(weaponData); // Кладем в рюкзак
-                _model.SetWeapon(weaponData);          // Берем в руки
+                playerModel.AddPurchasedWeapon(weaponData);
+                playerModel.SetWeapon(weaponData);
             }
         }
         else
         {
-            // Смена экипировки
-            if (_model.CurrentWeapon != weaponData)
+            if (playerModel.CurrentWeapon != weaponData)
             {
-                _model.SetWeapon(weaponData);          // Берем в руки бесплатно
+                playerModel.SetWeapon(weaponData);
             }
         }
     }
 
-    public void RefreshUI()
+    private void RefreshUI()
     {
-        if (_model == null || weaponData == null) return;
+        if (playerModel == null || weaponData == null) return;
 
-        bool isCurrent = _model.CurrentWeapon == weaponData;
-        bool isPurchased = _model.IsWeaponPurchased(weaponData); // Проверяем рюкзак!
-        Debug.Log($"Слот магазина [{weaponData.name}]: В руках? {isCurrent} | Куплено? {isPurchased} | Всего пушек в рюкзаке: {_model.PurchasedWeaponNames.Count}");
+        bool isCurrent = playerModel.CurrentWeapon == weaponData;
+        bool isPurchased = playerModel.IsWeaponPurchased(weaponData);
+
         if (isCurrent)
         {
-            priceText.gameObject.SetActive(false); 
-            buttonText.text = "ИСПОЛЬЗУЕТСЯ";
-            actionButton.interactable = false;     
+            priceText.gameObject.SetActive(false);
+            buttonText.text = "EQUIPPED";
+            actionButton.interactable = false;
         }
         else if (isPurchased)
         {
-            priceText.gameObject.SetActive(false); 
-            buttonText.text = "ЭКИПИРОВАТЬ";
-            actionButton.interactable = true;      
+            priceText.gameObject.SetActive(false);
+            buttonText.text = "EQUIP";
+            actionButton.interactable = true;
         }
         else
         {
-            priceText.gameObject.SetActive(true);  
-            priceText.text = $"{price} МОНЕТ";
-            buttonText.text = "КУПИТЬ";
+            priceText.gameObject.SetActive(true);
+            priceText.text = price.ToString() + " COINS";
+            buttonText.text = "BUY";
             actionButton.interactable = true;
         }
     }

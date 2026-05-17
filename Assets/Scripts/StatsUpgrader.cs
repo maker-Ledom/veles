@@ -25,26 +25,15 @@ public class StatsUpgrader : MonoBehaviour
     }
     public void OpenPanel()
     {
-        upgradePanel.SetActive(true);
-        
-        // Сообщаем менеджеру, что интерфейс занят
         if (GameManager.Instance != null)
-        {
-            GameManager.Instance.isAnyPanelOpen = true;
-        }
-
-        Time.timeScale = 0f; 
+            GameManager.Instance.OpenPanel(upgradePanel);
+        else
+            upgradePanel.SetActive(true);
     }
 
     public void ClosePanel()
     {
-        upgradePanel.SetActive(false);
-
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.isAnyPanelOpen = false;
-            GameManager.Instance.ResumeGameplayState();
-        }
+        UIManager.Instance.CloseTopPanel();
     }
 
     public void TryUpgrade()

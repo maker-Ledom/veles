@@ -5,97 +5,87 @@ public class PlayerRuntime : MonoBehaviour
     [SerializeField] private PlayerData data;
     [SerializeField] private PlayerView view;
     
-    private PlayerModel _model;
-    public PlayerModel Model => _model;
-    private PlayerController _controller;
+    private PlayerModel model;
+    private PlayerController controller;
+    private Camera mainCamera;
+    private bool isDead = false;
 
     private void Awake()
     {
-        // Вместо new PlayerModel(data) берем готовую из менеджера
         if (GameManager.Instance != null && GameManager.Instance.PlayerModel != null)
         {
-            _model = GameManager.Instance.PlayerModel;
+            model = GameManager.Instance.PlayerModel;
         }
         else
         {
-            // На случай, если запускаем сцену минуя меню (для тестов)
-            _model = new PlayerModel(data);
+            model = new PlayerModel(data);
         }
 
-        _controller = GetComponent<PlayerController>();
-        _controller.Init(_model, data);
+        controller = GetComponent<PlayerController>();
+        controller.Init(model, data);
 
-        // Подписки на UI остаются прежними
-        _model.OnCoinsChanged += view.UpdateCoins;
-        _model.OnWeaponChanged += view.UpdateWeaponIcon;
-        _model.OnHealthChanged += view.UpdateHealth;
-        _model.OnStatsChanged += view.UpdateStatsUI;
-        _model.OnDeath += view.PlayDeathAnimation;
+        model.OnCoinsChanged += view.UpdateCoins;
+        model.OnWeaponChanged += view.UpdateWeaponIcon;
+        model.OnHealthChanged += view.UpdateHealth;
+        model.OnStatsChanged += view.UpdateStatsUI;
+        model.OnDeath += OnPlayerDeath;
     }
+
     private void Start()
     {
-        view.UpdateStatsUI(_model.Strength, _model.Agility);
-        view.UpdateCoins(_model.Coins);
-        view.SetupHealth(_model.MaxHealth);
-        _model.CurrentHealth = _model.MaxHealth;
-        view.UpdateHealth(_model.CurrentHealth, _model.MaxHealth);
-        if (_model.CurrentWeapon != null)
-        {
-            view.UpdateWeaponIcon(_model.CurrentWeapon);
-        }
+        mainCamera = Camera.main;
+        view.UpdateStatsUI(model.Strength, model.Agility);
+        view.UpdateCoins(model.Coins);
+        view.SetupHealth(model.MaxHealth);
+        
+        if (model.CurrentHealth <= 0)
+            model.CurrentHealth = model.MaxHealth;
+        view.UpdateHealth(model.CurrentHealth, model.MaxHealth);
+        
+        if (model.CurrentWeapon != null)
+            view.UpdateWeaponIcon(model.CurrentWeapon);
     }
-    private void OnDestroy()
-    {
-        // Важно отписаться при уничтожении объекта
-        if (_model != null)
-            _model.OnCoinsChanged -= view.UpdateCoins;
-    }
+
     private void Update()
     {
-// ПРОВЕРКА 1: Физическая пауза времени
-    if (Time.timeScale <= 0.0001f) return; 
+        if (isDead) return;
+        
+        if (GameManager.Instance != null && GameManager.Instance.IsGameBlocked())
+            return;
 
-    // ПРОВЕРКА 2: Флаг панелей (на всякий случай)
-    if (GameManager.Instance != null && GameManager.Instance.isAnyPanelOpen) return;
-        // 1. Получаем «сырой» ввод WASD
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");
         Vector2 input = new Vector2(moveX, moveZ);
 
-        // 2. Рассчитываем направления ОТНОСИТЕЛЬНО КАМЕРЫ
-        // Берем вектор "вперед" камеры и убираем наклон по вертикали
-        Vector3 camForward = Camera.main.transform.forward;
+        Vector3 camForward = mainCamera.transform.forward;
         camForward.y = 0;
         camForward.Normalize();
 
-        // Берем вектор "вправо" камеры (он всегда горизонтален)
-        Vector3 camRight = Camera.main.transform.right;
+        Vector3 camRight = mainCamera.transform.right;
         camRight.y = 0;
         camRight.Normalize();
 
-        // Итоговый вектор движения: W/S по вертикали экрана, A/D по горизонтали
         Vector3 cameraRelativeDir = (camForward * input.y + camRight * input.x).normalized;
 
-        // 3. Поворот к курсору (остается независимым и мгновенным)
         RotatePlayerToMouse();
 
-        // 4. Логика Рывка и Движения
-        if (Input.GetKeyDown(KeyCode.Space) && _controller.CanDash)
+        if (Input.GetKeyDown(KeyCode.Space) && controller.CanDash)
         {
-            // Рывок идет строго по направлению, которое мы вычислили выше
-            StartCoroutine(_controller.Dash(cameraRelativeDir));
+            StartCoroutine(controller.Dash(cameraRelativeDir));
         }
         else
         {
-            _controller.HandleMovement(cameraRelativeDir);
+            controller.HandleMovement(cameraRelativeDir);
         }
 
-        // 5. Обновляем анимации
-        UpdateAnimator(cameraRelativeDir);
-        if (Input.GetMouseButton(0)) // Удерживаем кнопку для стрельбы (автомат/узи)
+        bool isMoving = cameraRelativeDir.sqrMagnitude > 0.01f;
+        view.UpdateMoveAnimation(isMoving);
+
+        if (Input.GetMouseButton(0))
         {
-            _controller.TryShoot();
+            controller.TryShoot();
         }
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             view.ToggleStatsPanel(true);
@@ -104,57 +94,52 @@ public class PlayerRuntime : MonoBehaviour
         {
             view.ToggleStatsPanel(false);
         }
-        bool isMoving = cameraRelativeDir.sqrMagnitude > 0.01f;
-        view.UpdateMoveAnimation(isMoving);
     }
 
-    private void UpdateAnimator(Vector3 moveDir)
-    {
-        // Проверяем, есть ли движение
-        bool isMoving = moveDir.sqrMagnitude > 0.01f;
-        
-        // ВЫЗЫВАЕМ метод анимации (убери // перед строчкой)
-        view.UpdateMoveAnimation(isMoving); 
-    }
     private void RotatePlayerToMouse()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
-        // Создаем плоскость на высоте ТАЗА или ГРУДИ игрока (например, transform.position.y + 1f)
-        // Это уберет визуальное смещение при взгляде под углом.
-        float targetHeight = transform.position.y + 1f; 
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        float targetHeight = transform.position.y + 1f;
         Plane groundPlane = new Plane(Vector3.up, new Vector3(0, targetHeight, 0));
 
         if (groundPlane.Raycast(ray, out float rayDistance))
         {
             Vector3 pointToLook = ray.GetPoint(rayDistance);
-            
-            // Визуальная отладка: в эдиторе ты увидишь красную линию к точке, куда смотрит игрок
-            Debug.DrawLine(transform.position, pointToLook, Color.red);
-
-            _controller.HandleLookRotation(pointToLook);
+            controller.HandleLookRotation(pointToLook);
         }
     }
+
     public void ApplyDamage(float damage)
     {
-        _model.TakeDamage(damage); // Модель сама вызовет OnHealthChanged
+        if (isDead) return;
+        model.TakeDamage(damage);
     }
-// В файле PlayerRuntime.cs обнови метод:
+
     public void CollectCoin(int amount)
     {
-        _model.AddCoins(amount);
-        // Здесь можно добавить звук подбора через PlayerView
+        model.AddCoins(amount);
     }
+
+    private void OnPlayerDeath()
+    {
+        isDead = true;
+        view.PlayDeathAnimation();
+    }
+
     private void OnDisable()
     {
-        if (_model != null)
+        if (model != null)
         {
-            // ОТПИСЫВАЕМСЯ от событий, чтобы модель не вызывала методы у мертвого UI
-            _model.OnCoinsChanged -= view.UpdateCoins;
-            _model.OnWeaponChanged -= view.UpdateWeaponIcon;
-            _model.OnHealthChanged -= view.UpdateHealth;
-            _model.OnStatsChanged -= view.UpdateStatsUI;
-            _model.OnDeath -= view.PlayDeathAnimation;
+            model.OnCoinsChanged -= view.UpdateCoins;
+            model.OnWeaponChanged -= view.UpdateWeaponIcon;
+            model.OnHealthChanged -= view.UpdateHealth;
+            model.OnStatsChanged -= view.UpdateStatsUI;
+            model.OnDeath -= OnPlayerDeath;
         }
+    }
+
+    public PlayerModel Model
+    {
+        get { return model; }
     }
 }

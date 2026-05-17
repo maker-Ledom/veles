@@ -18,43 +18,47 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Color activeColor = Color.white;
     [SerializeField] private Color inactiveColor = new Color(0.5f, 0.5f, 0.5f, 1f);
 
-    private DialogueData _currentDialogue;
-    private int _currentIndex;
-    private UnityEvent _onDialogueEnd;
+    private DialogueData currentDialogue;
+    private int currentIndex;
+    private UnityEvent onDialogueEnd;
 
     private void Awake()
     {
         Instance = this;
-        dialoguePanel.SetActive(false);
+        if (dialoguePanel != null)
+            dialoguePanel.SetActive(false);
     }
 
-    public void StartDialogue(DialogueData data, Sprite npcSprite, UnityEvent onEndAction)
+    public void StartDialogue(DialogueData data, Sprite npcSprite, UnityEvent endAction)
     {
-        _currentDialogue = data;
-        _onDialogueEnd = onEndAction;
-        _currentIndex = 0;
-        
-        npcPortrait.sprite = npcSprite;
-        dialoguePanel.SetActive(true);
-        
-    // СТАВИМ НА ПАУЗУ
-        Time.timeScale = 0f; 
-        
+        if (data == null || data.lines.Length == 0) return;
+
+        currentDialogue = data;
+        onDialogueEnd = endAction;
+        currentIndex = 0;
+
+        if (npcPortrait != null)
+            npcPortrait.sprite = npcSprite;
+
         if (GameManager.Instance != null)
-        {
-            GameManager.Instance.isAnyPanelOpen = true;
-            // Если в твоем GameManager есть метод управления курсором, вызови его здесь
-            // Например, если он делает Cursor.visible = true;
-        }
-        DisplayLine();
+            GameManager.Instance.OpenPanel(dialoguePanel);
+
+        DisplayCurrentLine();
     }
 
     public void OnNextButtonClick()
     {
-        _currentIndex++;
-        if (_currentIndex < _currentDialogue.lines.Length)
+        if (currentDialogue == null || currentDialogue.lines == null)
         {
-            DisplayLine();
+            Debug.LogWarning("Dialogue already ended");
+            EndDialogue();
+            return;
+        }
+
+        currentIndex++;
+        if (currentIndex < currentDialogue.lines.Length)
+        {
+            DisplayCurrentLine();
         }
         else
         {
@@ -62,57 +66,65 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void DisplayLine()
+    private void DisplayCurrentLine()
     {
-        var line = _currentDialogue.lines[_currentIndex];
+        if (currentDialogue == null || currentDialogue.lines.Length <= currentIndex)
+        {
+            EndDialogue();
+            return;
+        }
+
+        DialogueLine line = currentDialogue.lines[currentIndex];
 
         if (line.speaker == Speaker.Hero)
         {
-            heroTextField.text = line.text;
-            npcTextField.text = ""; // Скрываем текст NPC
-            
-            heroPortrait.color = activeColor;
-            npcPortrait.color = inactiveColor;
-            heroPortrait.transform.localScale = Vector3.one * 1.1f; // Легкое увеличение
-            npcPortrait.transform.localScale = Vector3.one;
+            if (heroTextField != null)
+                heroTextField.text = line.text;
+            if (npcTextField != null)
+                npcTextField.text = "";
+
+            if (heroPortrait != null)
+            {
+                heroPortrait.color = activeColor;
+                heroPortrait.transform.localScale = Vector3.one * 1.1f;
+            }
+            if (npcPortrait != null)
+            {
+                npcPortrait.color = inactiveColor;
+                npcPortrait.transform.localScale = Vector3.one;
+            }
         }
         else
         {
-            npcTextField.text = line.text;
-            heroTextField.text = ""; // Скрываем текст героя
-            
-            npcPortrait.color = activeColor;
-            heroPortrait.color = inactiveColor;
-            npcPortrait.transform.localScale = Vector3.one * 1.1f;
-            heroPortrait.transform.localScale = Vector3.one;
+            if (npcTextField != null)
+                npcTextField.text = line.text;
+            if (heroTextField != null)
+                heroTextField.text = "";
+
+            if (npcPortrait != null)
+            {
+                npcPortrait.color = activeColor;
+                npcPortrait.transform.localScale = Vector3.one * 1.1f;
+            }
+            if (heroPortrait != null)
+            {
+                heroPortrait.color = inactiveColor;
+                heroPortrait.transform.localScale = Vector3.one;
+            }
         }
     }
 
     private void EndDialogue()
     {
-        // МЫ НЕ СНИМАЕМ ПАУЗУ СРАЗУ, если открывается магазин
-        // Мы просто закрываем панель диалога
-        dialoguePanel.SetActive(false);
-
-        if (_onDialogueEnd != null && _onDialogueEnd.GetPersistentEventCount() > 0)
-        {
-            // Вызываем открытие магазина/прокачки
-            _onDialogueEnd.Invoke(); 
-        }
-        else
-        {
-            // Если после диалога ничего не открывается — возвращаем время в норму
-            ResumeGame();
-        }
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1f;
         if (GameManager.Instance != null)
-        {
-            GameManager.Instance.isAnyPanelOpen = false;
-            GameManager.Instance.ResumeGameplayState(); 
-        }
+            GameManager.Instance.CloseTopPanel(); // сначала закрываем диалог
+        else
+            dialoguePanel.SetActive(false);
+
+        if (onDialogueEnd != null && onDialogueEnd.GetPersistentEventCount() > 0)
+            onDialogueEnd.Invoke(); // потом открываем новую панель
+
+        currentDialogue = null;
+        onDialogueEnd = null;
     }
 }

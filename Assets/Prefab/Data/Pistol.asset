@@ -16,6 +16,6 @@ MonoBehaviour:
   weaponName: Pistol
   icon: {fileID: 467892428, guid: e56da8c14470f984d928f5ebd7a4c490, type: 3}
   damage: 10
-  fireRate: 0.4
+  fireRate: 1
   projectileSpeed: 20
   projectilePrefab: {fileID: 755971107511600843, guid: 302797431a70d7847bbcd10c7cfd3fe9, type: 3}

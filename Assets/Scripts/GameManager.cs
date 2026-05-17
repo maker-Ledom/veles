@@ -7,37 +7,40 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Settings")]
-    public string menuScene = "MenuScene";
-    
-    private GameObject pausePanel;
-    private bool isPaused = false;
-    public PlayerModel PlayerModel { get; private set; }
+    public string menuSceneName = "MenuScene";
     public PlayerData playerData;
 
-    // Список для отслеживания всех открытых панелей (Магазин, Скиллы и т.д.)
-    private List<GameObject> _activePanels = new List<GameObject>();
-    [HideInInspector] public bool isAnyPanelOpen = false;
+    private PlayerModel playerModel;
+    private GameObject pausePanelReference;
+    private Stack<GameObject> activePanelStack = new Stack<GameObject>();
+    private bool isGamePaused = false;
 
     private void Awake()
     {
-        if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject);
-        PlayerModel = new PlayerModel(playerData);
-        PlayerModel.OnDeath += RespawnPlayer; }
-        else { Destroy(gameObject); }
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            playerModel = new PlayerModel(playerData);
+            playerModel.OnDeath += RespawnPlayer;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-    public void RegisterPanel(GameObject panel) => _activePanels.Add(panel);
-    public void UnregisterPanel(GameObject panel) => _activePanels.Remove(panel);
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == menuScene) return;
+        if (SceneManager.GetActiveScene().name == menuSceneName) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Если открыт магазин или прокачка — НЕ открываем паузу
-            if (isAnyPanelOpen)
+            if (activePanelStack.Count > 0)
             {
-                CloseAllUI();
+                CloseAllPanels();
             }
             else
             {
@@ -45,100 +48,118 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    private void RespawnPlayer()
-    {
-        Debug.Log("Менеджер: Начинаем возрождение...");
-        
-        // 1. Полностью исцеляем героя перед перемещением
-        PlayerModel.CurrentHealth = PlayerModel.MaxHealth;
-        
-        // 2. Сбрасываем флаги (паузы, открытые панели), если они были
-        isPaused = false;
-        isAnyPanelOpen = false;
-        Time.timeScale = 1f;
-        PlayerModel.ResetPerksState();
-        // 3. Загружаем сцену Хаба
-        // Убедись, что название сцены совпадает с тем, что в Build Settings
-        SceneManager.LoadScene("HubScene"); 
-    }
-    private void CloseAllUI()
-    {
-        // Ищем все объекты со скриптом StatsUpgrader или Shop и закрываем их
-        var upgraders = Object.FindObjectsByType<StatsUpgrader>(FindObjectsSortMode.None);
-        foreach (var u in upgraders) u.ClosePanel();
 
-        // Если у тебя есть отдельный скрипт для магазина, добавь его сюда так же
-        // var shops = Object.FindObjectsByType<WeaponShop>(FindObjectsSortMode.None);
-        // foreach (var s in shops) s.ClosePanel();
+    public void OpenPanel(GameObject panel)
+    {
+        Debug.Log($"OpenPanel called with {panel?.name}. Stack size before: {activePanelStack.Count}");
+        if (panel == null) return;
+        if (activePanelStack.Contains(panel)) return;
 
-        isAnyPanelOpen = false;
-        ResumeGameplayState();
+        panel.SetActive(true);
+        activePanelStack.Push(panel);
+        ApplyGameBlockState();
     }
-    public void StartGame()
+
+    public void CloseTopPanel()
     {
-        Time.timeScale = 1f;
-        isPaused = false;
-        // Загружаем следующую сцену (убедись, что она добавлена в Build Settings)
-        SceneManager.LoadScene("HubScene"); 
-    }
-    public void QuitGame()
-    {
-        Debug.Log("Игра закрывается...");
-        Application.Quit();
-    }
-    public void BackToMenu()
-    {
-        Time.timeScale = 1f;
-        isPaused = false;
-        _activePanels.Clear(); // Очищаем список панелей при выходе
-        SceneManager.LoadScene(menuScene);
-    }
-    private void CloseLastPanel()
-    {
-        // Берем последнюю открытую панель
-        GameObject panel = _activePanels[_activePanels.Count - 1];
-        
-        // Пытаемся закрыть через скрипт (чтобы вернулось время и т.д.)
-        if (panel.TryGetComponent<StatsUpgrader>(out var upgrader))
+        if (activePanelStack.Count == 0)
         {
-            upgrader.ClosePanel();
+            Debug.LogWarning("CloseTopPanel called but stack is empty");
+            return;
         }
-        else
-        {
-            // Если скрипта нет, просто выключаем и удаляем из списка
+        
+        GameObject panel = activePanelStack.Pop();
+        Debug.Log($"CloseTopPanel: closing panel '{panel?.name}'. Remaining stack size: {activePanelStack.Count}");
+        
+        if (panel != null)
             panel.SetActive(false);
-            UnregisterPanel(panel);
-            
-            // Если это была последняя панель — возвращаем мир в норму
-            if (_activePanels.Count == 0) ResumeGameplayState();
+        else
+            Debug.LogError("Panel object is null in stack!");
+        
+        ApplyGameBlockState();
+    }
+
+    public void CloseAllPanels()
+    {
+        while (activePanelStack.Count > 0)
+        {
+            GameObject panel = activePanelStack.Pop();
+            if (panel != null) panel.SetActive(false);
         }
+        ApplyGameBlockState();
     }
 
     public void TogglePause()
     {
-        if (pausePanel == null) return;
+        if (activePanelStack.Count > 0)
+        {
+            CloseAllPanels();
+            return;
+        }
 
-        isPaused = !isPaused;
-        pausePanel.SetActive(isPaused);
-        
-        // Обновляем состояние времени и курсора
-        ApplyGameState();
+        isGamePaused = !isGamePaused;
+        ApplyGameBlockState();
+
+        if (pausePanelReference != null)
+        {
+            pausePanelReference.SetActive(isGamePaused);
+        }
     }
 
-    public void ResumeGameplayState()
+    private void ApplyGameBlockState()
     {
-        isPaused = false;
-        // Мы не очищаем _activePanels здесь, так как этот метод 
-        // вызывается и при закрытии магазина, когда панель уже удалена из списка
-        ApplyGameState();
+        bool isBlocked = isGamePaused || activePanelStack.Count > 0;
+        Time.timeScale = isBlocked ? 0f : 1f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
-    private void ApplyGameState()
+
+    public bool IsGameBlocked()
     {
-        // Игра считается "замороженной", если включена пауза ИЛИ открыта любая панель
-        bool busy = isPaused || _activePanels.Count > 0;
-
-        Time.timeScale = busy ? 0f : 1f;
+        return isGamePaused || activePanelStack.Count > 0;
     }
 
-    public void SetPausePanel(GameObject panel) => pausePanel = panel;
+    public void SetPausePanel(GameObject panel)
+    {
+        pausePanelReference = panel;
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1f;
+        isGamePaused = false;
+        CloseAllPanels();
+        SceneManager.LoadScene("HubScene");
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quitting game");
+        Application.Quit();
+    }
+
+    public void BackToMenu()
+    {
+        Time.timeScale = 1f;
+        isGamePaused = false;
+        activePanelStack.Clear();
+        SceneManager.LoadScene(menuSceneName);
+    }
+
+    private void RespawnPlayer()
+    {
+        Debug.Log("Respawning player to HubScene");
+
+        playerModel.CurrentHealth = playerModel.MaxHealth;
+        isGamePaused = false;
+        Time.timeScale = 1f;
+        playerModel.ResetPerksState();
+
+        SceneManager.LoadScene("HubScene");
+    }
+
+    public PlayerModel PlayerModel
+    {
+        get { return playerModel; }
+    }
 }
