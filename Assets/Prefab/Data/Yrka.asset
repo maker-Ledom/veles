@@ -20,4 +20,4 @@ MonoBehaviour:
   attackRange: 1.5
   attackCooldown: 1.5
   detectionRange: 9.1
-  coinsReward: 0
+  coinsReward: 3

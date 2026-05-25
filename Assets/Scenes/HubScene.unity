@@ -10856,6 +10856,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gold
       objectReference: {fileID: 0}
+    - target: {fileID: 2018149883408073227, guid: ed9ced127c4b315409c24cfa93f13da0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6212152773362628728, guid: ed9ced127c4b315409c24cfa93f13da0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.61
