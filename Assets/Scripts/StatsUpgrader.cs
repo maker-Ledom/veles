@@ -33,7 +33,10 @@ public class StatsUpgrader : MonoBehaviour
 
     public void ClosePanel()
     {
-        UIManager.Instance.CloseTopPanel();
+        if (GameManager.Instance != null)
+            GameManager.Instance.CloseTopPanel();
+        else
+            Debug.LogWarning("GameManager.Instance is null, cannot close panel");
     }
 
     public void TryUpgrade()

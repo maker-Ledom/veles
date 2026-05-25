@@ -72,14 +72,23 @@ public class PlayerRuntime : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && controller.CanDash)
         {
             StartCoroutine(controller.Dash(cameraRelativeDir));
+            view.PlayDashAnimation(); // Запуск триггера "Dash"
         }
         else
         {
             controller.HandleMovement(cameraRelativeDir);
         }
 
-        bool isMoving = cameraRelativeDir.sqrMagnitude > 0.01f;
-        view.UpdateMoveAnimation(isMoving);
+        // РАСЧЕТ ДЛЯ BLEND TREE:
+        float forwardSpeed = 0f;
+        if (cameraRelativeDir.sqrMagnitude > 0.01f)
+        {
+            // Проекция: дает 1 при беге вперед, -1 при беге назад
+            forwardSpeed = Vector3.Dot(cameraRelativeDir, transform.forward);
+        }
+
+        // Передаем значение Speed в PlayerView
+        view.UpdateMoveAnimation(forwardSpeed);
 
         if (Input.GetMouseButton(0))
         {

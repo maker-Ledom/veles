@@ -38,12 +38,13 @@ public class PlayerView : MonoBehaviour
         }
     }
 
-    public void UpdateMoveAnimation(bool isMoving)
+// В PlayerView.cs заменяем старый метод на этот:
+    public void UpdateMoveAnimation(float forwardSpeed)
     {
         if (animator != null)
         {
-            // Устанавливаем Bool, который мы создали в контроллере
-            animator.SetBool("isMoving", isMoving);
+            // Передаем значение в Float-параметр Speed вашего Blend Tree
+            animator.SetFloat("Speed", forwardSpeed);
         }
     }
     public void UpdateCoins(int currentCoins)
@@ -70,6 +71,13 @@ public class PlayerView : MonoBehaviour
         {
             // Срабатывает триггер смерти
             animator.SetTrigger("Die");
+        }
+    }
+    public void PlayDashAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Dash");
         }
     }
 }

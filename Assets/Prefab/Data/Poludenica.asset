@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Poludenica
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Poludenica
-  maxHealth: 50
-  moveSpeed: 4.34
+  isBoss: 0
+  maxHealth: 500
+  moveSpeed: 6.98
   attackDamage: 39.85
   attackRange: 1.5
   attackCooldown: 1.5

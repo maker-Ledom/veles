@@ -15,7 +15,7 @@ MonoBehaviour:
   isPurchased: 0
   weaponName: Uzi
   icon: {fileID: 2052776441, guid: 1361353360a3ef442bb6726d21a9ff0a, type: 3}
-  damage: 7
-  fireRate: 0.01
+  damage: 5
+  fireRate: 0.1
   projectileSpeed: 20
   projectilePrefab: {fileID: 755971107511600843, guid: 302797431a70d7847bbcd10c7cfd3fe9, type: 3}

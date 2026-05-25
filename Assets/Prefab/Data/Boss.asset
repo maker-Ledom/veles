@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Boss
   isBoss: 1
-  maxHealth: 50
+  maxHealth: 1000
   moveSpeed: 3.5
   attackDamage: 10
   attackRange: 3
   attackCooldown: 0
-  detectionRange: 46.44
+  detectionRange: 9.7
   coinsReward: 50
