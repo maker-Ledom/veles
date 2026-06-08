@@ -49,7 +49,7 @@ public class CameraOcclusionHandler : MonoBehaviour
         }
         else
         {
-            existing.KeepOccluded(); // Объект всё еще загораживает обзор
+            existing.KeepOccluded();
         }
     }
 

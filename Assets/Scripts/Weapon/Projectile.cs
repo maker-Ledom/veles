@@ -9,7 +9,6 @@ public class Projectile : MonoBehaviour
     {
         _damage = damage;
         _speed = speed;
-        // Уничтожаем пулю через 3 секунды, чтобы не засорять память
         Destroy(gameObject, 3f);
     }
 

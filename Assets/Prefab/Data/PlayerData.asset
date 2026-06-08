@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16a82703d0416b4c9b519a7c6c4493b, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  baseStrength: 1
+  baseStrength: 48
   baseAgility: 1
   baseUpgradeCost: 10
   costMultiplier: 1.5
@@ -23,4 +23,4 @@ MonoBehaviour:
   dashDistance: 5
   dashDuration: 0.2
   baseDashCooldown: 1.5
-  startingWeapon: {fileID: 11400000, guid: c5d9008019287774fa31ea14320fcb12, type: 2}
+  startingWeapon: {fileID: 11400000, guid: 970f10c7655a38046abe5eb05eb69a27, type: 2}

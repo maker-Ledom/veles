@@ -2033,6 +2033,9 @@ MonoBehaviour:
   lootSpawner: {fileID: 0}
   data: {fileID: 11400000, guid: 8ea772028b7b150498723fe88ebb39a7, type: 2}
   _animator: {fileID: 1811692194539040293}
+  _renderers: []
+  _flashColor: {r: 1, g: 0, b: 0, a: 1}
+  _flashDuration: 10.23
 --- !u!114 &8583268478973305003
 MonoBehaviour:
   m_ObjectHideFlags: 0

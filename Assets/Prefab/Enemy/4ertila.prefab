@@ -2042,11 +2042,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3209825738045678542}
   - component: {fileID: 8222998842478316981}
-  - component: {fileID: 3610169366721720439}
+  - component: {fileID: 5147018803417911450}
   - component: {fileID: 5142745897521478302}
+  - component: {fileID: 3610169366721720439}
   - component: {fileID: 727031316476937308}
   - component: {fileID: 7925257839711986344}
-  - component: {fileID: 5147018803417911450}
   m_Layer: 3
   m_Name: 4ertila
   m_TagString: Enemy
@@ -2093,6 +2093,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5147018803417911450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8238059139270268370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4934d3d3ba3b191438f25a3f9981e0f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LootSpawner
+  lootPrefab: {fileID: 8741813104923622240, guid: 9ba4bc8e666c52e44ba463d944cc1032, type: 3}
+--- !u!114 &5142745897521478302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8238059139270268370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f5a79343dcd5647824df6279cd3a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  lootSpawner: {fileID: 5147018803417911450}
+  data: {fileID: 11400000, guid: 56d74334aa1e8574b944e6824b0b86e7, type: 2}
+  _animator: {fileID: 8222998842478316981}
 --- !u!195 &3610169366721720439
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2115,21 +2143,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5142745897521478302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8238059139270268370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f5a79343dcd5647824df6279cd3a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  lootSpawner: {fileID: 5147018803417911450}
-  data: {fileID: 11400000, guid: 56d74334aa1e8574b944e6824b0b86e7, type: 2}
-  _animator: {fileID: 8222998842478316981}
 --- !u!54 &727031316476937308
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2178,19 +2191,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.63280374, y: 1.4225957, z: 0.5176856}
   m_Center: {x: -0.008322872, y: 0.6863413, z: 0.09594881}
---- !u!114 &5147018803417911450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8238059139270268370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4934d3d3ba3b191438f25a3f9981e0f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LootSpawner
-  lootPrefab: {fileID: 8741813104923622240, guid: 9ba4bc8e666c52e44ba463d944cc1032, type: 3}
 --- !u!1 &8269176355057407164
 GameObject:
   m_ObjectHideFlags: 0

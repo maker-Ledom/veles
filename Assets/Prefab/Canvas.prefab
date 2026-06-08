@@ -1005,6 +1005,81 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1714540920768913368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8366132598289485767}
+  - component: {fileID: 1005963440097577874}
+  - component: {fileID: 7492937028791475144}
+  m_Layer: 5
+  m_Name: LifesaverIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &8366132598289485767
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714540920768913368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9079162236556200117}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -524, y: 375}
+  m_SizeDelta: {x: 100, y: 132.88}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1005963440097577874
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714540920768913368}
+  m_CullTransparentMesh: 1
+--- !u!114 &7492937028791475144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714540920768913368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -61860528, guid: dd676dc723ac0844aaa5387856696912, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1897533965337260292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3033,7 +3108,6 @@ GameObject:
   - component: {fileID: 8587555709543814296}
   - component: {fileID: 2696850807669286227}
   - component: {fileID: 9073133854781533274}
-  - component: {fileID: 1292424716554801917}
   m_Layer: 5
   m_Name: BuyButton
   m_TagString: Untagged
@@ -3143,7 +3217,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1292424716554801917}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopButton, Assembly-CSharp
         m_MethodName: OnPurchaseClick
         m_Mode: 1
@@ -3155,20 +3229,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1292424716554801917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3552052451788126238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f62792ae819e6ad41815d26f71c2ac48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
-  weaponToBuy: {fileID: 11400000, guid: 80ac0511a489aa14d82dbd23f5390068, type: 2}
-  price: 5
 --- !u!1 &3581466298777520523
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,7 +3453,6 @@ GameObject:
   - component: {fileID: 3325450758081156734}
   - component: {fileID: 1511494123043534295}
   - component: {fileID: 1215377146172465040}
-  - component: {fileID: 7107192093228365571}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -3503,7 +3562,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7107192093228365571}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopButton, Assembly-CSharp
         m_MethodName: OnPurchaseClick
         m_Mode: 1
@@ -3515,20 +3574,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7107192093228365571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3993615411541388844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f62792ae819e6ad41815d26f71c2ac48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
-  weaponToBuy: {fileID: 11400000, guid: 3ad9d38f6b7e7b24eb71a5da8c833307, type: 2}
-  price: 10
 --- !u!1 &4063726566715743547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3697,6 +3742,7 @@ RectTransform:
   - {fileID: 3037835622758329847}
   - {fileID: 6968859069565217125}
   - {fileID: 6040458905316495044}
+  - {fileID: 8366132598289485767}
   m_Father: {fileID: 4405578334313279019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4746,7 +4792,6 @@ GameObject:
   - component: {fileID: 6813886472121412999}
   - component: {fileID: 5431826437930026229}
   - component: {fileID: 7099713697245313279}
-  - component: {fileID: 2676790310030095463}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -4856,7 +4901,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2676790310030095463}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopButton, Assembly-CSharp
         m_MethodName: OnPurchaseClick
         m_Mode: 1
@@ -4868,20 +4913,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2676790310030095463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6131263657548481209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f62792ae819e6ad41815d26f71c2ac48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
-  weaponToBuy: {fileID: 11400000, guid: 970f10c7655a38046abe5eb05eb69a27, type: 2}
-  price: 30
 --- !u!1 &6147868312612469181
 GameObject:
   m_ObjectHideFlags: 0

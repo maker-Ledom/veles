@@ -117,12 +117,12 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         if (GameManager.Instance != null)
-            GameManager.Instance.CloseTopPanel(); // сначала закрываем диалог
+            GameManager.Instance.CloseTopPanel();
         else
             dialoguePanel.SetActive(false);
 
         if (onDialogueEnd != null && onDialogueEnd.GetPersistentEventCount() > 0)
-            onDialogueEnd.Invoke(); // потом открываем новую панель
+            onDialogueEnd.Invoke();
 
         currentDialogue = null;
         onDialogueEnd = null;

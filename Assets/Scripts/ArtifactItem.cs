@@ -5,9 +5,9 @@ public class ArtifactItem : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.PlayerModel.HasLifesaverPerk = true;
+            GameManager.Instance.PlayerModel.AcquireLifesaverPerk();
             Debug.Log("Вы получили артефакт: Сердце Феникса!");
-            Destroy(gameObject); // Артефакт подобран
+            Destroy(gameObject);
         }
     }
 }

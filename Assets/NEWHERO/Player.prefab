@@ -1315,6 +1315,7 @@ MonoBehaviour:
   statsPanel: {fileID: 0}
   strengthLevelText: {fileID: 0}
   agilityLevelText: {fileID: 0}
+  lifesaverIcon: {fileID: 0}
 --- !u!1 &5688699370834601393
 GameObject:
   m_ObjectHideFlags: 0

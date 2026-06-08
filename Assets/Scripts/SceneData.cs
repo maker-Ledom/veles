@@ -10,7 +10,6 @@ public class SceneData : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            // Передаем панель из этой сцены в глобальный менеджер
             GameManager.Instance.SetPausePanel(pausePanel);
         }
     }

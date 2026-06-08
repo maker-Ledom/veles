@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8130118602761591335}
   - component: {fileID: 5734413282022431115}
   - component: {fileID: 132920119329226586}
+  - component: {fileID: 5073534390330917174}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -59,3 +60,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e990f3816a5414286ab3c7347d4631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIController
+--- !u!114 &5073534390330917174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785866179120114995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9971b37d01b41714d829e5a748ef1866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FadeTransition
+  fadeCanvas: {fileID: 4614833572254763043, guid: e072b6a638395af4f849f45e3c72a7c3, type: 3}
+  fadeImage: {fileID: 0}
+  fadeDuration: 0.8

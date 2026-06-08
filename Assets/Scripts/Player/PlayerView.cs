@@ -9,14 +9,26 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinsText;
     [SerializeField] private Image activeWeaponIcon;
     [Header("Stats Panel")]
-    [SerializeField] private GameObject statsPanel; // Сама панель (для вкл/выкл)
+    [SerializeField] private GameObject statsPanel;
     [SerializeField] private TextMeshProUGUI strengthLevelText;
     [SerializeField] private TextMeshProUGUI agilityLevelText;
+    [Header("Lifesaver Artifact")]
+    [SerializeField] private Image lifesaverIcon;
     public void ToggleStatsPanel(bool isActive)
     {
         if (statsPanel != null) statsPanel.SetActive(isActive);
     }
-
+    public void ShowLifesaverIcon(bool show)
+    {
+        if (lifesaverIcon != null)
+            lifesaverIcon.gameObject.SetActive(show);
+    }
+    // PlayerView.cs – добавьте этот метод
+public void RefreshLifesaverIcon(bool hasPerk)
+{
+    if (lifesaverIcon != null)
+        lifesaverIcon.gameObject.SetActive(hasPerk);
+}
     public void UpdateStatsUI(int str, int agi)
     {
         if (strengthLevelText != null) 
@@ -33,23 +45,18 @@ public class PlayerView : MonoBehaviour
     {
         if (hpText != null)
         {
-            // Форматируем строку. f0 убирает знаки после запятой (10.0 -> 10)
             hpText.text = $"{current:f0} / {max:f0}";
         }
     }
-
-// В PlayerView.cs заменяем старый метод на этот:
     public void UpdateMoveAnimation(float forwardSpeed)
     {
         if (animator != null)
         {
-            // Передаем значение в Float-параметр Speed вашего Blend Tree
             animator.SetFloat("Speed", forwardSpeed);
         }
     }
     public void UpdateCoins(int currentCoins)
     {
-        // "N0" добавляет разделители тысяч для красоты (например, 1,000)
         coinsText.text = currentCoins.ToString();
     }
     public void UpdateWeaponIcon(WeaponData data)
@@ -69,7 +76,6 @@ public class PlayerView : MonoBehaviour
     {
         if (animator != null)
         {
-            // Срабатывает триггер смерти
             animator.SetTrigger("Die");
         }
     }

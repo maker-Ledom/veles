@@ -4358,6 +4358,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5073534390330917174, guid: 3452d02d917f54a4bab4b936f2dafd50, type: 3}
+      propertyPath: fadeImage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073534390330917174, guid: 3452d02d917f54a4bab4b936f2dafd50, type: 3}
+      propertyPath: fadeCanvas
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5785866179120114995, guid: 3452d02d917f54a4bab4b936f2dafd50, type: 3}
       propertyPath: m_Name
       value: GameManager

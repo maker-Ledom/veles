@@ -1,10 +1,8 @@
 using UnityEngine;
-
 public class PlayerRuntime : MonoBehaviour
 {
     [SerializeField] private PlayerData data;
     [SerializeField] private PlayerView view;
-    
     private PlayerModel model;
     private PlayerController controller;
     private Camera mainCamera;
@@ -29,6 +27,8 @@ public class PlayerRuntime : MonoBehaviour
         model.OnHealthChanged += view.UpdateHealth;
         model.OnStatsChanged += view.UpdateStatsUI;
         model.OnDeath += OnPlayerDeath;
+        model.OnLifesaverAcquired += OnLifesaverAcquired;
+        model.OnLifesaverUsed += OnLifesaverUsed;
     }
 
     private void Start()
@@ -44,8 +44,10 @@ public class PlayerRuntime : MonoBehaviour
         
         if (model.CurrentWeapon != null)
             view.UpdateWeaponIcon(model.CurrentWeapon);
-    }
 
+        view.RefreshLifesaverIcon(model.HasLifesaverPerk);
+    }
+    
     private void Update()
     {
         if (isDead) return;
@@ -78,16 +80,12 @@ public class PlayerRuntime : MonoBehaviour
         {
             controller.HandleMovement(cameraRelativeDir);
         }
-
-        // РАСЧЕТ ДЛЯ BLEND TREE:
         float forwardSpeed = 0f;
         if (cameraRelativeDir.sqrMagnitude > 0.01f)
         {
-            // Проекция: дает 1 при беге вперед, -1 при беге назад
             forwardSpeed = Vector3.Dot(cameraRelativeDir, transform.forward);
         }
 
-        // Передаем значение Speed в PlayerView
         view.UpdateMoveAnimation(forwardSpeed);
 
         if (Input.GetMouseButton(0))
@@ -104,7 +102,6 @@ public class PlayerRuntime : MonoBehaviour
             view.ToggleStatsPanel(false);
         }
     }
-
     private void RotatePlayerToMouse()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -134,7 +131,15 @@ public class PlayerRuntime : MonoBehaviour
         isDead = true;
         view.PlayDeathAnimation();
     }
+    private void OnLifesaverAcquired()
+    {
+        view.RefreshLifesaverIcon(true);
+    }
 
+    private void OnLifesaverUsed()
+    {
+        view.RefreshLifesaverIcon(false);
+    }
     private void OnDisable()
     {
         if (model != null)
@@ -144,6 +149,8 @@ public class PlayerRuntime : MonoBehaviour
             model.OnHealthChanged -= view.UpdateHealth;
             model.OnStatsChanged -= view.UpdateStatsUI;
             model.OnDeath -= OnPlayerDeath;
+            model.OnLifesaverAcquired -= () => view.ShowLifesaverIcon(true);
+            model.OnLifesaverUsed -= () => view.ShowLifesaverIcon(false);
         }
     }
 

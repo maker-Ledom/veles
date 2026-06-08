@@ -112,6 +112,7 @@ MonoBehaviour:
   statsPanel: {fileID: 0}
   strengthLevelText: {fileID: 0}
   agilityLevelText: {fileID: 0}
+  lifesaverIcon: {fileID: 0}
 --- !u!95 &7660560971601009092
 Animator:
   serializedVersion: 7
@@ -208,6 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   firePoint: {fileID: 7796555658873645995}
   currentWeapon: {fileID: 11400000, guid: c5d9008019287774fa31ea14320fcb12, type: 2}
+  gravityMultiplier: 1
 --- !u!114 &4488388942339398154
 MonoBehaviour:
   m_ObjectHideFlags: 0

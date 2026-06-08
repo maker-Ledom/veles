@@ -8,11 +8,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController _characterController;
     private bool _isDashing = false;
     private float _lastDashTime;
-
-    // === НОВОЕ: гравитация ===
     private Vector3 _velocity;
     private bool _isGrounded;
-
     public bool CanDash => !_isDashing && Time.time >= _lastDashTime + _model.CurrentDashCooldown;
 
     [Header("Weapon System")]
@@ -20,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public WeaponData currentWeapon;
     private float _nextFireTime;
 
-    [Header("Gravity Settings")]   // НОВОЕ: настройка силы гравитации
+    [Header("Gravity Settings")]
     [SerializeField] private float gravityMultiplier = 1f;
 
     public void Init(PlayerModel model, PlayerData data)
@@ -66,28 +63,21 @@ public class PlayerController : MonoBehaviour
         _isDashing = false;
     }
 
-    // ========== ОБНОВЛЁННЫЙ МЕТОД ПЕРЕМЕЩЕНИЯ С ГРАВИТАЦИЕЙ ==========
     public void HandleMovement(Vector3 inputDirection)
     {
         if (_isDashing) return;
 
-        // 1. Горизонтальное движение (от ввода игрока)
         Vector3 move = inputDirection * _data.moveSpeed;
-
-        // 2. Вертикальная скорость (гравитация)
         if (_characterController.isGrounded && _velocity.y < 0)
         {
-            _velocity.y = -2f; // небольшое прижатие к земле
+            _velocity.y = -2f;
         }
 
-        // Применяем гравитацию (Physics.gravity.y = -9.81)
         _velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
         move.y = _velocity.y;
 
-        // 3. Перемещаем персонажа
         _characterController.Move(move * Time.deltaTime);
 
-        // 4. Обновляем флаг grounded для следующего кадра
         _isGrounded = _characterController.isGrounded;
     }
 

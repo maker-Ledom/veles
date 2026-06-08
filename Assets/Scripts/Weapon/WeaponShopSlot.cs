@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
 public class WeaponShopSlot : MonoBehaviour
 {
     [Header("Weapon Settings")]
@@ -72,20 +71,20 @@ public class WeaponShopSlot : MonoBehaviour
         if (isCurrent)
         {
             priceText.gameObject.SetActive(false);
-            buttonText.text = "EQUIPPED";
+            buttonText.text = "ЭКИПИРОВАННО";
             actionButton.interactable = false;
         }
         else if (isPurchased)
         {
             priceText.gameObject.SetActive(false);
-            buttonText.text = "EQUIP";
+            buttonText.text = "ЭКИПИРОВАТЬ";
             actionButton.interactable = true;
         }
         else
         {
             priceText.gameObject.SetActive(true);
-            priceText.text = price.ToString() + " COINS";
-            buttonText.text = "BUY";
+            priceText.text = price.ToString() + " МОНЕТ";
+            buttonText.text = "КУПИТЬ";
             actionButton.interactable = true;
         }
     }

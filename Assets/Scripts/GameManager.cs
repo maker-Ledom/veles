@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
             playerModel.OnDeath += RespawnPlayer;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            if (FindObjectOfType<FadeTransition>() == null)
+            {
+                GameObject fadePrefab = Resources.Load<GameObject>("FadeTransitionPrefab");
+                if (fadePrefab != null) Instantiate(fadePrefab);
+                else Debug.LogError("Не найден префаб FadeTransitionPrefab в папке Resources");
+            }
         }
         else
         {
@@ -129,7 +135,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         isGamePaused = false;
         CloseAllPanels();
-        SceneManager.LoadScene("HubScene");
+        FadeTransition.LoadSceneWithFade("HubScene");
     }
 
     public void QuitGame()
@@ -143,7 +149,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         isGamePaused = false;
         activePanelStack.Clear();
-        SceneManager.LoadScene(menuSceneName);
+        FadeTransition.LoadSceneWithFade(menuSceneName);
     }
 
     private void RespawnPlayer()
@@ -155,7 +161,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         playerModel.ResetPerksState();
 
-        SceneManager.LoadScene("HubScene");
+        FadeTransition.LoadSceneWithFade("HubScene");
     }
 
     public PlayerModel PlayerModel

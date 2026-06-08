@@ -144,7 +144,7 @@ Material:
     - _ColorGrass_Two: {r: 0.74067444, g: 0.93333334, b: 0.25098044, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NearForRange: {r: 3, g: 20, b: 0, a: 0}
-    - _PlayerPosition: {r: 30.118736, g: 0.083233334, b: 33.502182, a: 0}
+    - _PlayerPosition: {r: 14.170685, g: 0.083233334, b: 9.543282, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _WindNearForRange: {r: 0, g: 0, b: 0, a: 0}
     - _WindNoiseContrast: {r: 0, g: 1, b: 0, a: 0}

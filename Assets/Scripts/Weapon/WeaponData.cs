@@ -9,5 +9,5 @@ public class WeaponData : ScriptableObject
     public float damage = 10f;
     public float fireRate = 0.2f;
     public float projectileSpeed = 20f;
-    public GameObject projectilePrefab; // Префаб пули
+    public GameObject projectilePrefab;
 }
